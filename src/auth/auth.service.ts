@@ -24,13 +24,13 @@ export class AuthService {
             //return the saved user
             return user;
                   
-            }
+            
 
-      }catch(){
+      }catch(error){
 
       }
+}
      
-
       signin(){
             return {msg: 'I have sign in'};
       };
