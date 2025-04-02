@@ -12,18 +12,24 @@ export class AuthService {
       //genarate hash password hash
       const hash = await argon.hash(dto.password);
       //save new user in db
-      const user = await this.prisma.user.create({
-            data:{
-                  email:dto.email,
-                  hash,
-            },
-      });
+      try{
+            const user = await this.prisma.user.create({
+                  data:{
+                        email:dto.email,
+                        hash,
+                  },
+            });
+      
+            delete user.hash;
+            //return the saved user
+            return user;
+                  
+            }
 
-      delete user.hash;
-      //return the saved user
-      return user;
-            
-      };
+      }catch(){
+
+      }
+     
 
       signin(){
             return {msg: 'I have sign in'};
