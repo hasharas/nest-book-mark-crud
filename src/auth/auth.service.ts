@@ -1,8 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import { ForbiddenException, Injectable } from '@nestjs/common';
 import { User, Bookmark } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 import * as argon from 'argon2';
 import { AuthDto } from './dto';
+import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 
 @Injectable()
 export class AuthService {
@@ -27,7 +28,11 @@ export class AuthService {
             
 
       }catch(error){
-
+            if(error instanceof PrismaClientKnownRequestError){
+                  if(error.code === 'P2002'){
+                        throw new ForbiddenException('Credential tacken',)
+                  }
+            }
       }
 }
      
