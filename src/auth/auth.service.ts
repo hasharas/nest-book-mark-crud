@@ -37,6 +37,14 @@ export class AuthService {
 }
      
       signin(){
+            //find the user by email
+            //if user does not exist thro exception
+
+            //compare password
+            //if password correct throw exception
+
+            //send back the user
+            
             return {msg: 'I have sign in'};
       };
 }
